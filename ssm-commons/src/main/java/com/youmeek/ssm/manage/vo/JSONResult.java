@@ -7,6 +7,9 @@ public class JSONResult {
     private String success;
 
 
+    public void main(){
+
+    }
     public String getMessage() {
         return message;
     }

@@ -50,4 +50,10 @@
     </bean>
     <!--文件上传 end-->
 
+    <bean class="com.mangofactory.swagger.configuration.SpringSwaggerConfig" />
+    <bean class="com.SwaggerConfig" />
+    <!-- Serve static content-->
+    <mvc:resources mapping="/swagger/**" location="/WEB-INF/swagger/"/>
+    <!--<mvc:resources mapping="*.html" location="/"/>-->
+    <mvc:default-servlet-handler/>
 </beans>

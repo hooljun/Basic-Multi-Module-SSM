@@ -19,7 +19,7 @@
     <!-- 集中定义公用的依赖版本号 -->
     <!--版本变量设置 start-->
     <properties>
-        <!--架包版本变量 start-->
+        <!--jar包版本变量 start-->
 
         <!--2016-02-20注释掉代码，切换到spring3试试-->
         <!--mybatis官网看到,如果要使用spring4的话,要用：mybatis-2-spring这个架包,http://blog.mybatis.org/2015/11/spring-4-got-you-down-with-no-ibatis.html-->
@@ -37,7 +37,10 @@
         <guava.version>15.0</guava.version>
         <swagger-annotations.version>1.3.11</swagger-annotations.version>
         <swagger.version>1.0.2</swagger.version>
-
+        <webmagic.version>0.6.1</webmagic.version>
+        <poi.version>3.10.1</poi.version>
+        <xmlbeans.version>2.6.0</xmlbeans.version>
+        <stax.version>1.0.1</stax.version>
 
         <!--下面这两个是springAOP需要用到-->
         <aspectjweaver.version>1.7.2</aspectjweaver.version>
@@ -65,7 +68,7 @@
         <httpclient.version>4.3.3</httpclient.version>
         <jackson-databind.version>2.4.2</jackson-databind.version>
         <fastjson.version>1.1.43</fastjson.version>
-        <!--架包版本变量 end-->
+        <!--jar包版本变量 end-->
 
         <!--插件版本变量 start-->
         <tomcat6-maven-plugin.version>2.1</tomcat6-maven-plugin.version>
@@ -372,6 +375,54 @@
                 <artifactId>classmate</artifactId>
                 <version>${classmate.version}</version>
             </dependency>
+            <dependency>
+                <groupId>us.codecraft</groupId>
+                <artifactId>webmagic-core</artifactId>
+                <version>${webmagic.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>us.codecraft</groupId>
+                <artifactId>webmagic-extension</artifactId>
+                <version>${webmagic.version}</version>
+            </dependency>
+
+            <!--poi excel依赖-start-->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml-schemas</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-scratchpad</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-excelant</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.xmlbeans</groupId>
+                <artifactId>xmlbeans</artifactId>
+                <version>${xmlbeans.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>stax</groupId>
+                <artifactId>stax-api</artifactId>
+                <version>${stax.version}</version>
+            </dependency>
+            <!--poi excel依赖-end-->
         </dependencies>
         <!--架包依赖 end-->
     </dependencyManagement>

@@ -26,18 +26,8 @@ public class Com58PageProcesser implements PageProcessor {
     //添加日志
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     public static final Task TASK = Site.me().toTask();
-
-    public static final String URL_PAGE = "http://sz\\.58\\.com/chuzu/\\w+/";
-    public static final String URL_QUERY = "http://sz\\.58\\.com/\\w+/chuzu/";
-
-
-//    private Site site = TASK.getSite()
-//            .me()
-//            .setDomain("bj.58.com")
-//            .setSleepTime(1000)
-//            .setUserAgent("Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) ");
-////            .setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.65 Safari/537.31");
-
+    //各模块处理单元
+    private Com58Model modelProcess = new Com58Model();
 
     private Site site = Site
             .me()
@@ -51,7 +41,8 @@ public class Com58PageProcesser implements PageProcessor {
 //            .setDomain("bj.58.com")
             .setCharset("utf-8")
 //            .setUserAgent("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.22 (KHTML, like Gecko) Chrome/25.0.1364.160 Safari/537.22");
-            .setUserAgent("Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) ");
+//            .setUserAgent("Mozilla/5.0 (compatible; Baiduspider/2.0; +http://www.baidu.com/search/spider.html) ")
+            ;
 
     public void changeUserAgent(Site site) {
         String randomUserAgent = HeaderBuilder.randomUserAgent();
@@ -61,24 +52,20 @@ public class Com58PageProcesser implements PageProcessor {
     @Override
     public void process(Page page) {
 
-//        this.changeUserAgent(site);
+        this.changeUserAgent(site);
         logger.info("site info:{}", site.getUserAgent());
-        System.out.println("=======CURR======="+page.getUrl());
-//        page.addTargetRequests(page.getHtml().xpath("//div[@class='main']//div[@class='content']//div[@class='listTitle']").links().all());
-        page.addTargetRequests(page.getHtml().xpath("//div[@class='main']//div[@class='content']//div[@class='listBox']//ul[@class='listUl']").links().all());
-        page.addTargetRequests(page.getHtml().links().regex(URL_PAGE).all());
-//        page.addTargetRequests(page.getHtml().links().regex(URL_QUERY).all());
 
-        page.putField("url",page.getUrl());
-        page.putField("title",  page.getHtml().xpath("//div[@class='main-wrap']//div[@class='house-title']/h1/text()"));
-//        page.putField("content",page.getHtml().xpath("//div[@id='articlebody']//div[@class='articalContent']"));
-        page.putField("money",  page.getHtml().xpath("//div[@class='house-basic-info']//div[@class='house-pay-way f16']//b[1]/text()")+""+                                    page.getHtml().xpath("//div[@class='house-basic-info']//div[@class='house-pay-way f16']//span[1]/text()"));
-        page.putField("addr",   page.getHtml().xpath("//div[@class='house-basic-info']//ul[@class='f14']//li//span[@class='dz']/text()"));
-        page.putField("room",   page.getHtml().xpath("//div[@class='house-basic-info']//ul[@class='f14']//li[2]//span[2]/text()"));
-        if (StringUtils.isBlank(page.getResultItems().get("title").toString()) || "null".equals(page.getResultItems().get("title") )) {
-            //skip this page
-            page.setSkip(true);
-        }
+        //XX出租
+        modelProcess.processModelChuzu(page);
+        //公寓
+//        modelProcess.processModelBrand(page);
+        //个人
+//        modelProcess.processModelPersonal(page);
+        //经纪人
+//        modelProcess.processModelBroker(page);
+        //热租房源
+//        modelProcess.processModelHot(page);
+
     }
 
     @Override
@@ -114,14 +101,23 @@ public class Com58PageProcesser implements PageProcessor {
     public static void main(String[] args) {
 
         Spider.create(new Com58PageProcesser())
-                .setDownloader(new ClientDownloader())
-//                .setDownloader(new MogoroomDownloader())
-//                .addUrl("http://sh.58.com/chuzu/")
-//                .addUrl("http://bj.58.com/chuzu/")
-                .addUrl("http://sz.58.com/chuzu/")
-//                .addPipeline(new ExcelPipeline("D:\\excel\\"))
+//                .setDownloader(new ClientDownloader())
+                .setDownloader(new MogoroomDownloader())
+//
+//                /*.addUrl("http://hz.58.com/chuzu/")*/.addUrl("http://hz.58.com/pinpaigongyu/")//品牌公寓 //杭州
+
+//                .addUrl("http://sh.58.com/chuzu/")//上海租房
+//                .addUrl("http://sh.58.com/pinpaigongyu/")//品牌公寓
+//                .addUrl("http://sh.58.com/chuzu/0/")//个人房源
+//                .addUrl("http://sh.58.com/chuzu/1/")//经纪人
+//                .addUrl("http://sh.58.com/chuzu/?isreal=true")//热租房源
+
+                .addUrl("http://bj.58.com/chuzu/")
+//                .addUrl("http://sz.58.com/chuzu/")
+                .addPipeline(new ExcelPipeline("D:\\excel\\bj"))
                 .addPipeline(new ConsolePipeline())
                 .thread(10)
                 .run();
     }
+
 }

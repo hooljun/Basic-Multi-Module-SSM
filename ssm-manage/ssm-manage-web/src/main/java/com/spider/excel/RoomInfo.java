@@ -20,23 +20,14 @@ public class RoomInfo {
 
     @ExtractBy("//div[@class='main-wrap']//div[@class='house-title']/h1/text()")
     private String title ;
-    @ExtractBy("//div[@class='house-basic-info']//div[@class='house-pay-way f16']//b[1]/text()")
-    private String money ;
-    @ExtractBy("//div[@class='house-basic-info']//ul[@class='f14']//li//span[@class='dz']/text()")
+    private String name;
+    private String mobile;
     private String addr;
-    @ExtractBy("//div[@class='house-basic-info']//ul[@class='f14']//li[2]//span[2]/text()")
+    private String upTime ;
     private String room;
     private String url;
 
     public RoomInfo() {
-    }
-
-    public RoomInfo(String title, String money, String addr, String room, String url) {
-        this.title = title;
-        this.money = money;
-        this.addr = addr;
-        this.room = room;
-        this.url = url;
     }
 
     public String getTitle() {
@@ -47,12 +38,12 @@ public class RoomInfo {
         this.title = title;
     }
 
-    public String getMoney() {
-        return money;
+    public String getUpTime() {
+        return upTime;
     }
 
-    public void setMoney(String money) {
-        this.money = money;
+    public void setUpTime(String upTime) {
+        this.upTime = upTime;
     }
 
     public String getAddr() {
@@ -79,8 +70,20 @@ public class RoomInfo {
         this.url = url;
     }
 
-    public static void main(String[] args) {
-
-        OOSpider.create(Site.me(), new ConsolePageModelPipeline(), RoomInfo.class).addUrl("http://bj.58.com/zufang/").thread(4).run();
+    public String getMobile() {
+        return mobile;
     }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
 }

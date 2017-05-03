@@ -237,8 +237,8 @@ class HttpClientGenerator
     // 代理隧道验证信息
 //    final static String proxyUser = "H01234567890123P";
 //    final static String proxyPass = "0123456789012345";
-    final static String proxyUser = "H97F34A77T2K06YD";
-    final static String proxyPass = "B3944E70A20E7A74";
+    final static String proxyUser = "H9G503FUS705073D";
+    final static String proxyPass = "53553B003311BE7A";
 
     public HttpClientGenerator() {
         Registry<ConnectionSocketFactory> reg = RegistryBuilder.<ConnectionSocketFactory> create()

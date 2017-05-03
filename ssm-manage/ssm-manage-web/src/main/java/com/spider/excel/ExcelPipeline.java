@@ -26,6 +26,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ExcelPipeline extends FilePersistentBase implements Pipeline {
 
+    public static String exlName = "北京出租";
     public static ConcurrentLinkedQueue<RoomInfo>  queue = new ConcurrentLinkedQueue();
     public static AtomicInteger count = new AtomicInteger(0);
     public static AtomicInteger excelLineNum  = new AtomicInteger(0);
@@ -52,10 +53,14 @@ public class ExcelPipeline extends FilePersistentBase implements Pipeline {
             value = entry.getValue()+"";
             if("title".equals(entry.getKey())){
                 roomInfo.setTitle(value);
-            }else if("money".equals(entry.getKey())){
-                roomInfo.setMoney(value);
+            }else if("mobile".equals(entry.getKey())){
+                roomInfo.setMobile(value);
+            }else if("name".equals(entry.getKey())){
+                roomInfo.setName(value);
             }else if("addr".equals(entry.getKey())){
                 roomInfo.setAddr(value);
+            }else if("upTime".equals(entry.getKey())){
+                roomInfo.setUpTime(value);
             }else if("room".equals(entry.getKey())){
                 roomInfo.setRoom(value);
             }else if("url".equals(entry.getKey())){
@@ -84,12 +89,12 @@ public class ExcelPipeline extends FilePersistentBase implements Pipeline {
                 }
                 try {
 
-                    File file = new File(path + "export.xls");
+                    File file = new File(path + exlName+".xls");
                     if(!file.exists()){//追加
-                        headers = new String[]{ "标题", "价格", "地址", "房型", "URL" };
+                        headers = new String[]{ "标题", "来自经纪人/个人", "手机号","区域/地址","更新时间","房型/公寓名称", "URL" };
                     }
                     OutputStream out = new FileOutputStream(file,true);
-                    ex.exportExcel(headers, dataset, out,file ,excelLineNum.get());
+                    ex.exportExcel(exlName,headers, dataset, out,file ,excelLineNum.get());
                     excelLineNum.addAndGet(11);
                     out.close();
                     System.out.println("excel导出成功！");

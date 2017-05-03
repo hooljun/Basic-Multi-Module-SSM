@@ -44,15 +44,17 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class ExportExcel<T> {
 
+	public static Pattern p = Pattern.compile("^//d+(//.//d+)?$");
+	public static HSSFFont font3 = null;
 	public static final String FILE_SEPARATOR = System.getProperties().getProperty("file.separator");
 
 	public void exportExcel(Collection<T> dataset, OutputStream out) {
 //		exportExcel("测试POI导出EXCEL文档", null, dataset, out, "yyyy-MM-dd");
 	}
 
-	public void exportExcel(String[] headers, Collection<T> dataset,
+	public void exportExcel(String exlName,String[] headers, Collection<T> dataset,
 			OutputStream out,File file,Integer excelLineNum) {
-		exportExcel("58房源数据", headers, dataset, out,file, "yyyy-MM-dd",excelLineNum);
+		exportExcel(exlName, headers, dataset, out,file, "yyyy-MM-dd",excelLineNum);
 	}
 
 	public void exportExcel(String[] headers, Collection<T> dataset,
@@ -90,9 +92,11 @@ public class ExportExcel<T> {
 //			sheet.setDefaultColumnWidth(15);
 			sheet.setColumnWidth(0, 80 * 256);
 			sheet.setColumnWidth(1, 20 * 256);
-			sheet.setColumnWidth(2, 30 * 256);
+			sheet.setColumnWidth(2, 20 * 256);
 			sheet.setColumnWidth(3, 40 * 256);
-			sheet.setColumnWidth(4, 100 * 256);
+			sheet.setColumnWidth(4, 40 * 256);
+			sheet.setColumnWidth(5, 40 * 256);
+			sheet.setColumnWidth(6, 100 * 256);
 
 			// 产生表格标题行
 			HSSFRow rowTitle =  sheet.createRow(0);
@@ -189,14 +193,17 @@ public class ExportExcel<T> {
 					}
 					// 如果不是图片数据，就利用正则表达式判断textValue是否全部由数字组成
 					if (textValue != null) {
-						Pattern p = Pattern.compile("^//d+(//.//d+)?$");
+
 						Matcher matcher = p.matcher(textValue);
 						if (matcher.matches()) {
 							// 是数字当作double处理
 							cell.setCellValue(Double.parseDouble(textValue));
 						} else {
 							HSSFRichTextString richString = new HSSFRichTextString(textValue);
-							HSSFFont font3 = workbook.createFont();
+							if(font3 == null){
+
+								font3 = workbook.createFont();
+							}
 							font3.setColor(HSSFColor.BLUE.index);
 							richString.applyFont(font3);
 							cell.setCellValue(richString);
@@ -338,19 +345,5 @@ public class ExportExcel<T> {
 			e.printStackTrace();
 		}
 
-	}
-	/**
-	 * 创建要出入的行中单元格
-	 * @param row
-	 * @return
-	 */
-	private void createCell(HSSFRow row) {
-
-//		HSSFCell cell = row.createCell(0);
-//		cell.setCellValue(999999);
-
-		row.createCell(0).setCellValue(3333);
-		row.createCell(1).setCellValue(1.2);
-		row.createCell(2).setCellValue("This is a string cell");
 	}
 }

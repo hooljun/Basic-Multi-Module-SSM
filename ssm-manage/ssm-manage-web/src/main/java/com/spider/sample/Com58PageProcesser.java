@@ -100,6 +100,8 @@ public class Com58PageProcesser implements PageProcessor {
 
     public static void main(String[] args) {
 
+        ExcelPipeline.exlName = "长沙出租";
+
         Spider.create(new Com58PageProcesser())
 //                .setDownloader(new ClientDownloader())
                 .setDownloader(new MogoroomDownloader())
@@ -112,9 +114,9 @@ public class Com58PageProcesser implements PageProcessor {
 //                .addUrl("http://sh.58.com/chuzu/1/")//经纪人
 //                .addUrl("http://sh.58.com/chuzu/?isreal=true")//热租房源
 
-                .addUrl("http://bj.58.com/chuzu/")
+                .addUrl("http://cs.58.com/chuzu/")
 //                .addUrl("http://sz.58.com/chuzu/")
-                .addPipeline(new ExcelPipeline("D:\\excel\\bj"))
+                .addPipeline(new ExcelPipeline("D:\\excel\\58\\changsha"))
                 .addPipeline(new ConsolePipeline())
                 .thread(10)
                 .run();

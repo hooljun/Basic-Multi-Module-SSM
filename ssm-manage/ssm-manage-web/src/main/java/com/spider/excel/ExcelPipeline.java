@@ -26,7 +26,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class ExcelPipeline extends FilePersistentBase implements Pipeline {
 
-    public static String exlName = "北京出租";
+    public static String exlName = "出租房源";
     public static ConcurrentLinkedQueue<RoomInfo>  queue = new ConcurrentLinkedQueue();
     public static AtomicInteger count = new AtomicInteger(0);
     public static AtomicInteger excelLineNum  = new AtomicInteger(0);

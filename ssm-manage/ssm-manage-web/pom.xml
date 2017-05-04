@@ -146,5 +146,13 @@
             <artifactId>stax-api</artifactId>
         </dependency>
         <!--poi excel依赖-end-->
+
+        <!--mc依赖-end-->
+        <dependency>
+            <groupId>com.googlecode.xmemcached</groupId>
+            <artifactId>xmemcached</artifactId>
+        </dependency>
+        <!--mc依赖-end-->
+
     </dependencies>
 </project>

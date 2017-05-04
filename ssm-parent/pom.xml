@@ -85,6 +85,8 @@
         <maven-source-plugin.version>2.2.1</maven-source-plugin.version>
         <!--插件版本变量 end-->
 
+        <xmemcached.version>1.4.3</xmemcached.version>
+
         <!--其他变量 start-->
         <war-name.version>ssm</war-name.version>
         <jdk.version>1.7</jdk.version>
@@ -423,6 +425,14 @@
                 <version>${stax.version}</version>
             </dependency>
             <!--poi excel依赖-end-->
+
+            <!--memcache 依赖-end-->
+            <dependency>
+                <groupId>com.googlecode.xmemcached</groupId>
+                <artifactId>xmemcached</artifactId>
+                <version>${xmemcached.version}</version>
+            </dependency>
+            <!--memcache 依赖-end-->
         </dependencies>
         <!--架包依赖 end-->
     </dependencyManagement>

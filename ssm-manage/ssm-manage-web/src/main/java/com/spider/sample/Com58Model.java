@@ -13,10 +13,13 @@ public class Com58Model {
 
     //上海
 //    public static final String PRE = "sh";
-    public static final String PRE = "bj";
+//    public static final String PRE = "bj";
 //    public static final String PRE = "sz";
 //    public static final String PRE = "nj";
 //    public static final String PRE = "hz";
+//    public static final String PRE = "wh";
+//    public static final String PRE = "zz";
+    public static final String PRE = "cs";
 
     public static final String URL_PAGE = "http://"+PRE+"\\.58\\.com/chuzu/\\w+";
     public static final String URL_QUERY = "http://"+PRE+"\\.58\\.com/\\w+/chuzu/";
@@ -31,7 +34,7 @@ public class Com58Model {
     public static  String area2 = null;
     public static  String detail = null;
     /**
-     * 58-上海出租模块
+     * 58-出租模块
      */
     public void processModelChuzu(Page page){
 
